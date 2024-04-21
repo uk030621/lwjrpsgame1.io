@@ -71,7 +71,7 @@
 
             .summary {
                 color: white;
-                margin-top: 10px;
+                margin-top: 20px;
                 margin-left: 0px;
                 width: 325px;
                 text-align: center;
@@ -127,6 +127,19 @@
             let attempts = 0;
             const maxAttempts = 20;
             let success = 0
+
+            function getImageUrl(move) {
+                switch (move) {
+                    case 'rock':
+                        return 'rock-emoji.png';
+                    case 'paper':
+                        return 'paper-emoji.png';
+                    case 'scissors':
+                        return 'scissors-emoji.png';
+                    default:
+                        return '';
+                }
+            }
 
             function resetGame() {
                 wins = 0;
@@ -195,7 +208,11 @@
 
                 // Display result
                 //document.getElementById('result').textContent = `You picked ${playerMove}.\n Computer picked ${computerMove}.\n ${result}`;
-                document.getElementById('result').innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}.<br>${result}`;
+                //document.getElementById('result').innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}.<br>${result}`;
+                document.getElementById('result').innerHTML = `
+                    You picked <img src="${getImageUrl(playerMove)}" style="width: 30px; height: 30px;"> 
+                    Computer picked <img src="${getImageUrl(computerMove)}" style="width: 30px; height: 30px;">
+                    <br>${result}`;
                 document.getElementById('outcome').textContent = `Your success rate =  ${success}%.`;
                 
                 // Disable buttons if maximum attempts reached
