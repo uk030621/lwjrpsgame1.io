@@ -206,13 +206,24 @@
 
                 success = ((wins/attempts)*100).toFixed(1);
 
+                let resultStyle = '';
+                if (result === 'You win.') {
+                    resultStyle = 'font-weight: bold; font-size: 24px';
+                } else if (result === 'You lose.') {
+                    resultStyle = 'font-weight: bold; font-size: 24px';
+                }
+                else {
+                    resultStyle = 'font-weight: bold; font-size: 24px';
+                }
+
+                
                 // Display result
                 //document.getElementById('result').textContent = `You picked ${playerMove}.\n Computer picked ${computerMove}.\n ${result}`;
                 //document.getElementById('result').innerHTML = `You picked ${playerMove}. Computer picked ${computerMove}.<br>${result}`;
                 document.getElementById('result').innerHTML = `
                     You picked <img src="${getImageUrl(playerMove)}" style="width: 30px; height: 30px;"> 
                     Computer picked <img src="${getImageUrl(computerMove)}" style="width: 30px; height: 30px;">
-                    <br>${result}`;
+                    <br><span style="${resultStyle}">${result}</span>`;
                 document.getElementById('outcome').textContent = `Your success rate =  ${success}%.`;
                 
                 // Disable buttons if maximum attempts reached
@@ -223,8 +234,8 @@
                 }
 
                 
-                console.log('wins =', wins, 'attempts =', attempts);
-                console.log('Success Rate = ', success,'%')
+                //console.log('wins =', wins, 'attempts =', attempts);
+                //console.log('Success Rate = ', success,'%')
 
             }
 
