@@ -151,20 +151,37 @@
     </div>
     
         <script>
-
         // Get all buttons with the specified IDs
         var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
 
         // Loop through each button and add event listener
         buttons.forEach(function(button) {
-        button.addEventListener("click", function() {
+        button.addEventListener("mousedown", function() {
             var button = this;
             button.style.backgroundColor = "white"; // Change color when clicked
+        });
+
+        button.addEventListener("mouseup", function() {
+            var button = this;
             setTimeout(function() {
-            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after 120ms (0.125 seconds)
+            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
+            }, 120);
+        });
+
+        // Add touch event listeners for mobile devices
+        button.addEventListener("touchstart", function() {
+            var button = this;
+            button.style.backgroundColor = "white"; // Change color when touched
+        });
+
+        button.addEventListener("touchend", function() {
+            var button = this;
+            setTimeout(function() {
+            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
             }, 120);
         });
         });
+        
 
 
             //document.title = "DOM";
