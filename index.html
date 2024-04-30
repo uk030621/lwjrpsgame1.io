@@ -19,6 +19,7 @@
             }
             .rock, .paper, .scissors {
                 background-color: black;
+                transition: background-color 0.3s ease;
                 color: white;
                 margin-left: 10px;
                 border-radius: 50px;
@@ -30,8 +31,8 @@
                 margin-bottom: 0;
                 margin-top: 0;   
             }
-
-            .rock:hover, .paper:hover, .scissors:hover {
+            
+            .rock:active, .paper:active, .scissors:active {
                 cursor: pointer;
                 background-color: white;
             }
