@@ -32,9 +32,6 @@
                 margin-top: 0;   
             }
             
-            .rock:active, .paper:active, .scissors:active {
-                cursor: pointer;
-                background-color: white;
             }
 
             table {
@@ -122,6 +119,20 @@
     <div class = "stats" id="outcome"></div>
 
         <script>
+                // Get all buttons with the specified IDs
+            var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
+    
+            // Loop through each button and add event listener
+            buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                var button = this;
+                button.style.backgroundColor = "white"; // Change color when clicked
+                setTimeout(function() {
+                button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after 120ms (0.125 seconds)
+                }, 120);
+            });
+            });
+                
                 // Declare variables outside of the onclick handlers
             let randomNumber, computerMove;
             let wins = 0, ties = 0, losses = 0, count;
