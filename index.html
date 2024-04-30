@@ -105,6 +105,12 @@
                     width: 90%; /* Adjust as needed for smaller screens */
                 }
             }
+            #datetime{
+                color: white;
+                padding: 12px;
+                opacity: 0.6;
+            }
+            
 
         </style>
     </head>
@@ -113,7 +119,8 @@
     <!--<button>Start</button>
         <button class = "js-button">Second Button</button>-->
        
-    <div id="container"> 
+    <div id="container">
+        <div id="datetime"></div>
         <p class = "js-dylan" >Rock Paper Scissors</p>
 
         <button class = "rock" id = "rockButton">
@@ -150,7 +157,27 @@
     </div>
     
         <script>
+            function updateDateTime() {
+            const currentDate = new Date();
+            const dateElement = document.getElementById("datetime");
+            
+            // Options for formatting the date
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            
+            // Format the date and time separately
+            const formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+            const formattedTime = currentDate.toLocaleTimeString(undefined, timeOptions);
+            
+            // Update the date element with both date and time
+            dateElement.textContent = `${formattedDate} ${formattedTime}`;
+        }
         
+        // Call updateDateTime function initially
+        updateDateTime();
+        
+        // Set interval to update every second
+        setInterval(updateDateTime, 1000);
   
         
             //document.title = "DOM";
