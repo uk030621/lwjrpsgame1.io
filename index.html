@@ -150,18 +150,17 @@
     </div>
     
         <script>
-        // Function to change button color when clicked or touched and revert it back after a short delay
         function changeButtonColor(button) {
             button.style.backgroundColor = "white"; // Change color when clicked or touched
             setTimeout(function() {
             button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
-            }, 120);
+            }, 300);
         }
         
         
         // Get all buttons with the specified IDs
         //var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
-        var buttons = document.querySelectorAll(".rock, .paper, .scissors");
+        var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
         
         // Loop through each button and add event listeners for both mouse and touch events
         buttons.forEach(function(button) {
@@ -175,6 +174,7 @@
             changeButtonColor(button); // Change button color
             });
         });
+  
         
             //document.title = "DOM";
             //console.log(document.body.innerHTML)
