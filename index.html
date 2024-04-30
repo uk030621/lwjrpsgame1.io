@@ -151,35 +151,49 @@
     </div>
     
         <script>
+        // Function to change button color when touched
+        function changeButtonColor(button) {
+            button.style.backgroundColor = "white"; // Change color when touched
+            setTimeout(function() {
+            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
+            }, 120);
+        }
+        
         // Get all buttons with the specified IDs
         var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
-
+        
         // Loop through each button and add event listener
         buttons.forEach(function(button) {
-        button.addEventListener("mousedown", function() {
+            button.addEventListener("mousedown", function() {
             var button = this;
             button.style.backgroundColor = "white"; // Change color when clicked
-        });
-
-        button.addEventListener("mouseup", function() {
+            });
+        
+            button.addEventListener("mouseup", function() {
             var button = this;
             setTimeout(function() {
-            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
+                button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
             }, 120);
+            });
         });
-
-        // Add touch event listeners for mobile devices
-        button.addEventListener("touchstart", function() {
-            var button = this;
-            button.style.backgroundColor = "white"; // Change color when touched
+        
+        // Add touch event listeners to the document body
+        document.body.addEventListener("touchstart", function(event) {
+            var touchTarget = event.target;
+            buttons.forEach(function(button) {
+            if (touchTarget === button) {
+                changeButtonColor(button);
+            }
+            });
         });
-
-        button.addEventListener("touchend", function() {
-            var button = this;
-            setTimeout(function() {
-            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
-            }, 120);
-        });
+        
+        document.body.addEventListener("touchend", function(event) {
+            var touchTarget = event.target;
+            buttons.forEach(function(button) {
+            if (touchTarget === button) {
+                changeButtonColor(button);
+            }
+            });
         });
         
 
