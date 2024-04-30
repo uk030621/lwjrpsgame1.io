@@ -151,53 +151,31 @@
     </div>
     
         <script>
-        // Function to change button color when touched
-        function changeButtonColor(button) {
-            button.style.backgroundColor = "white"; // Change color when touched
-            setTimeout(function() {
-            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
-            }, 120);
-        }
-        
-        // Get all buttons with the specified IDs
-        var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
-        
-        // Loop through each button and add event listener
-        buttons.forEach(function(button) {
-            button.addEventListener("mousedown", function() {
-            var button = this;
-            button.style.backgroundColor = "white"; // Change color when clicked
-            });
-        
-            button.addEventListener("mouseup", function() {
-            var button = this;
-            setTimeout(function() {
+        // Function to change button color when clicked or touched and revert it back after a short delay
+            function changeButtonColor(button) {
+                button.style.backgroundColor = "white"; // Change color when clicked or touched
+                setTimeout(function() {
                 button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
-            }, 120);
-            });
-        });
-        
-        // Add touch event listeners to the document body
-        document.body.addEventListener("touchstart", function(event) {
-            var touchTarget = event.target;
-            buttons.forEach(function(button) {
-            if (touchTarget === button) {
-                changeButtonColor(button);
+                }, 120);
             }
-            });
-        });
-        
-        document.body.addEventListener("touchend", function(event) {
-            var touchTarget = event.target;
+            
+            // Get all buttons with the specified IDs
+            var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
+            
+            // Loop through each button and add event listeners for both mouse and touch events
             buttons.forEach(function(button) {
-            if (touchTarget === button) {
-                changeButtonColor(button);
-            }
+                button.addEventListener("mousedown", function(event) {
+                event.preventDefault(); // Prevent default mouse behavior (e.g., text selection)
+                changeButtonColor(button); // Change button color
+                });
+            
+                button.addEventListener("touchstart", function(event) {
+                event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+                changeButtonColor(button); // Change button color
+                });
             });
-        });
+  
         
-
-
             //document.title = "DOM";
             //console.log(document.body.innerHTML)
             //console.log(document.querySelector('.resetGame').innerHTML);
