@@ -26,13 +26,17 @@
                 position: relative; /* Ensure position is relative for animation */
             }
             
+            
             .animate {
-                animation: example 0.25s; /* Apply animation */
+                animation: example 0.25s linear; /* Apply animation with linear timing function */
             }
             
+             
             @keyframes example {
                 0%   { top: 0px; }
-                50%  { top: 300px; }
+                25%  { top: 0px; } /* Adjusted position */
+                50%  { top: 0px; }
+                75%  { top: 0px; } /* Adjusted position */
                 100% { top: 0px; }
             }
             
@@ -43,6 +47,31 @@
                 font-size:32px;
                 width: 300px;
                 
+            }
+
+            /* Define the shake animation */
+            @keyframes shake {
+                0% { transform: rotate(-35deg); }
+                25% { transform: rotate(35deg); }
+                50% { transform: rotate(-35deg); }
+                75% { transform: rotate(35deg); }
+                100% { transform: rotate(0); }
+            }
+
+            /* Apply the shake animation to the button */
+            .shake {
+                animation: shake 0.8s ease-in-out; /* Adjust duration and timing function as needed */
+            }
+
+            /* Define the reset animation */
+            @keyframes rotateVertical {
+                0% { transform: rotateX(0deg); }
+                100% { transform: rotateX(360deg); }
+            }
+
+            /* Apply the rotateVertical animation to the reset button */
+            #resetAll.rotate {
+                animation: rotateVertical 0.75s linear !important; /* Adjust duration and timing function as needed */
             }
 
             img {
@@ -122,8 +151,13 @@
                 opacity: 0.6;
             }
 
+            .thursday{
+                font-size: smaller;
+                
+            }
+
         </style>
-    </head>
+    </head> 
     <body>
 
     <!--<button>Start</button>
@@ -131,6 +165,8 @@
        
     <div id="container"> 
         <div id="datetime"></div>
+
+        <p class ="thursday">Developed by LWJ</p>
 
         <p class = "js-dylan" >Rock Paper Scissors</p>
 
@@ -168,7 +204,45 @@
     </div>
     
         <script>
+
+        // Function to add shake animation to the button
+        function shakeButton(button) {
+            button.classList.add('shake');
+            
+            // Remove the shake class after the animation completes
+            setTimeout(function() {
+                button.classList.remove('shake');
+            }, 500); // Duration of the animation
+        }
+
         
+        
+        // Function to change button color when clicked or touched and revert it back after a short delay
+        /*function changeButtonColor(button) {
+            button.style.backgroundColor = "white"; // Change color when clicked or touched
+            setTimeout(function() {
+            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
+            }, 300);
+        }
+        
+        
+        // Get all buttons with the specified IDs
+        //var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
+        var buttons = document.querySelectorAll(".rock, .paper, .scissors");
+        
+        // Loop through each button and add event listeners for both mouse and touch events
+        buttons.forEach(function(button) {
+            button.addEventListener("mousedown", function(event) {
+            event.preventDefault(); // Prevent default mouse behavior (e.g., text selection)
+            changeButtonColor(button); // Change button color
+            });
+        
+            button.addEventListener("touchstart", function(event) {
+            event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+            changeButtonColor(button); // Change button color
+            });
+        });*/
+  
         
         function updateDateTime() {
             const currentDate = new Date();
@@ -253,7 +327,24 @@
                 document.getElementById('rockButton').disabled = false;
                 document.getElementById('paperButton').disabled = false;
                 document.getElementById('scissorsButton').disabled = false;
+                
+                console.log("Reset game function called"); // Add this line for debugging
+
+                // Trigger the reset animation
+                var resetButton = document.getElementById('resetAll');
+                
+                // Remove any existing animation classes
+                resetButton.classList.remove('rotate');
+            
+                // Add a class to trigger the animation
+                resetButton.classList.add('rotate');
+            
+                // Remove the class after the animation completes
+                resetButton.addEventListener('animationend', function() {
+                    resetButton.classList.remove('rotate');
+                }, { once: true }); // Remove the event listener after it's triggered once
             }
+            
             // Function to trigger animation
             function triggerAnimation() {
                 var container = document.getElementById('container');
@@ -370,16 +461,25 @@
             // Attach onclick handlers to buttons
             document.getElementById('rockButton').onclick = function () {
                 playGame('rock');
+                shakeButton(this); // Shake the clicked button
             };
             document.getElementById('paperButton').onclick = function () {
                 playGame('paper');
+                shakeButton(this); // Shake the clicked button
             };
             document.getElementById('scissorsButton').onclick = function () {
                 playGame('scissors');
+                shakeButton(this); // Shake the clicked button
             }; 
             document.getElementById('resetAll').onclick = function () {
                 resetGame();
+                shakeButton(this); // Shake the clicked button
             }; 
+
+            // Attach onclick handler to the reset button
+            document.getElementById('resetAll').onclick = function () {
+                resetGame();
+            };
 
 
         </script>
