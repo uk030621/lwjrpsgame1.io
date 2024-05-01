@@ -152,6 +152,23 @@
                 }
             }
 
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(0.7); }
+                100% { transform: scale(1); }
+            }
+              
+            .pulse-red {
+                animation: pulse 1s infinite, color-pulse 1s infinite alternate;
+            }
+              
+            @keyframes color-pulse {
+                0% { color: white; }
+                100% { color: white; }
+            }
+              
+
+
             #datetime{
                 color: white;
                 padding: 12px;
@@ -180,6 +197,12 @@
                 opacity: 0.6;
                 
             }
+            p.js-jake{
+                font-size: medium;
+            }
+            p.js-dylan{
+                margin-bottom: 0px;
+            }
 
         </style>
     </head> 
@@ -196,9 +219,9 @@
             <p class ="thursday">LWJ</p>
         </div>
         
-        <!--<p class ="thursday">Developed by LWJ</p>-->
-
         <p class = "js-dylan" >Rock Paper Scissors</p>
+        <p id="maxAttemptsMessage" class="js-jake">Max Attempts = 20</p>
+
 
         <button class = "rock" id = "rockButton">
             <img src = "rock-emoji.png">
@@ -234,6 +257,8 @@
     </div>
     
         <script>
+
+        
 
         // Function to add shake animation to the button
         function shakeButton(button) {
@@ -272,8 +297,19 @@
             changeButtonColor(button); // Change button color
             });
         });*/
-  
+        function updateMaxAttemptsMessage(attempts) {
+            console.log("Hello")
+            console.log(attempts)
+            var maxAttemptsMessage = document.getElementById("maxAttemptsMessage");
+            if (attempts >= 19) {
+              maxAttemptsMessage.classList.add("pulse-red");
+            } else {
+              maxAttemptsMessage.classList.remove("pulse-red");
+            }
+        }
+          
         
+
         function updateDateTime() {
             const currentDate = new Date();
             const dateElement = document.getElementById("datetime");
@@ -373,6 +409,11 @@
                 resetButton.addEventListener('animationend', function() {
                     resetButton.classList.remove('rotate');
                 }, { once: true }); // Remove the event listener after it's triggered once
+
+                // Remove the pulsing effect from max attempts message
+                var maxAttemptsMessage = document.getElementById("maxAttemptsMessage");
+                maxAttemptsMessage.classList.remove("pulse-red");
+
             }
             
             // Function to trigger animation
@@ -388,11 +429,16 @@
 
             // Function to generate computer move and display result
             function playGame(playerMove, choice) {
+                updateMaxAttemptsMessage(attempts);
+                console.log(playerMove)
                 //localStorage.removeItem('attempts'); // Removes the item with key 'key2'
                 //console.log(localStorage.getItem('attempts'))
                 // Increment attempts
+                // Check if maximum attempts have been reached before playing the game
+                // Check if maximum attempts have been reached before playing the game
+                // Increment attempts
                 attempts++;
-                
+
                 // Generate random number
                 randomNumber = Math.random();
                 
