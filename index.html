@@ -17,14 +17,25 @@
                 /*background-color: hsl(0, 0%, 95%);*/
             }
 
-            #container{
+            #container {
                 font-family: Arial, Helvetica, sans-serif;
                 background-color: hsl(0, 0%, 15%);
                 border-radius: 15px;
-                width: 90%; /* Adjusted width for mobile screens */
-                max-width: 100%; /* Updated to 100% to fit mobile screens */
-                
+                width: 90%;
+                max-width: 100%;
+                position: relative; /* Ensure position is relative for animation */
             }
+            
+            .animate {
+                animation: example 0.25s; /* Apply animation */
+            }
+            
+            @keyframes example {
+                0%   { top: 0px; }
+                50%  { top: 300px; }
+                100% { top: 0px; }
+            }
+            
 
             p{
                 color: white;
@@ -47,9 +58,8 @@
                 border-color: none;
                 border-width: 0px;
                 margin-bottom: 0;
-                margin-top: 0;  
+                margin-top: 0;
             }
-
 
             table {
                 border-collapse: collapse;
@@ -105,12 +115,12 @@
                     width: 90%; /* Adjust as needed for smaller screens */
                 }
             }
+
             #datetime{
                 color: white;
                 padding: 12px;
                 opacity: 0.6;
             }
-            
 
         </style>
     </head>
@@ -119,8 +129,9 @@
     <!--<button>Start</button>
         <button class = "js-button">Second Button</button>-->
        
-    <div id="container">
+    <div id="container"> 
         <div id="datetime"></div>
+
         <p class = "js-dylan" >Rock Paper Scissors</p>
 
         <button class = "rock" id = "rockButton">
@@ -157,7 +168,35 @@
     </div>
     
         <script>
-            function updateDateTime() {
+        
+        // Function to change button color when clicked or touched and revert it back after a short delay
+        function changeButtonColor(button) {
+            button.style.backgroundColor = "white"; // Change color when clicked or touched
+            setTimeout(function() {
+            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
+            }, 300);
+        }
+        
+        
+        // Get all buttons with the specified IDs
+        //var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
+        var buttons = document.querySelectorAll(".rock, .paper, .scissors");
+        
+        // Loop through each button and add event listeners for both mouse and touch events
+        buttons.forEach(function(button) {
+            button.addEventListener("mousedown", function(event) {
+            event.preventDefault(); // Prevent default mouse behavior (e.g., text selection)
+            changeButtonColor(button); // Change button color
+            });
+        
+            button.addEventListener("touchstart", function(event) {
+            event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+            changeButtonColor(button); // Change button color
+            });
+        });
+  
+        
+        function updateDateTime() {
             const currentDate = new Date();
             const dateElement = document.getElementById("datetime");
             
@@ -178,8 +217,9 @@
         
         // Set interval to update every second
         setInterval(updateDateTime, 1000);
-
         
+
+
             //document.title = "DOM";
             //console.log(document.body.innerHTML)
             //console.log(document.querySelector('.resetGame').innerHTML);
@@ -240,10 +280,19 @@
                 document.getElementById('paperButton').disabled = false;
                 document.getElementById('scissorsButton').disabled = false;
             }
-            
+            // Function to trigger animation
+            function triggerAnimation() {
+                var container = document.getElementById('container');
+                container.classList.add('animate');
+
+                // Reset animation after a delay longer than the animation duration
+                setTimeout(function() {
+                    container.classList.remove('animate');
+                }, 2500); // Adjust this value to ensure it's longer than the animation duration
+            }
 
             // Function to generate computer move and display result
-            function playGame(playerMove) {
+            function playGame(playerMove, choice) {
                 //localStorage.removeItem('attempts'); // Removes the item with key 'key2'
                 //console.log(localStorage.getItem('attempts'))
                 // Increment attempts
@@ -331,6 +380,16 @@
                 
                 //console.log('wins =', wins, 'attempts =', attempts);
                 //console.log('Success Rate = ', success,'%')
+                // Trigger animation
+                var container = document.getElementById('container');
+                container.classList.add('animate');
+
+                // Reset animation after 2 seconds (same duration as animation)
+                setTimeout(function() {
+                    container.classList.remove('animate');
+                }, 2000);
+
+                triggerAnimation(); // Call the function to trigger animation
 
             }
 
