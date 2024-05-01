@@ -13,7 +13,7 @@
                 display: flex;
                 justify-content: center;
                 /*align-items: center;*/
-                height: 80vh;
+                height: 100vh;
                 /*background-color: hsl(0, 0%, 95%);*/
             }
 
@@ -76,7 +76,14 @@
 
             img {
                 width: 50px;
+                margin-bottom: 0;
             }
+
+            img.me{
+                margin-bottom: 0px;
+                padding-bottom:5px;
+            }
+
             .rock, .paper, .scissors {
                 background-color: hsl(0, 0%, 15%);
                 color: white;
@@ -153,6 +160,24 @@
 
             .thursday{
                 font-size: smaller;
+                opacity: 0.6;
+                
+            }
+
+            .me{
+                width: 120px;
+                height: auto;
+                border-radius: 25px;
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+
+            button.developBtn{
+                background-color:hsl(0, 0%, 15%);
+                margin-left: 15px;
+                color: white;
+                border-radius: 20px;
+                opacity: 0.6;
                 
             }
 
@@ -165,8 +190,13 @@
        
     <div id="container"> 
         <div id="datetime"></div>
-
-        <p class ="thursday">Developed by LWJ</p>
+        <button type="button" class="developBtn" data-bs-toggle="collapse" data-bs-target="#demo">Developer</button>
+        <div id="demo" class="collapse">
+            <img class = "me" src="lwj.jpg">
+            <p class ="thursday">LWJ</p>
+        </div>
+        
+        <!--<p class ="thursday">Developed by LWJ</p>-->
 
         <p class = "js-dylan" >Rock Paper Scissors</p>
 
