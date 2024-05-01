@@ -179,34 +179,6 @@
         // Set interval to update every second
         setInterval(updateDateTime, 1000);
 
-        // Function to change button color when clicked or touched and revert it back after a short delay
-        function changeButtonColor(button) {
-            button.style.backgroundColor = "white"; // Change color when clicked or touched
-            setTimeout(function() {
-            button.style.backgroundColor = "hsl(0, 0%, 15%)"; // Change back after a short delay
-            }, 300);
-        }
-        
-        
-        // Get all buttons with the specified IDs
-        //var buttons = document.querySelectorAll("#rockButton, #paperButton, #scissorsButton");
-        var buttons = document.querySelectorAll(".rock, .paper, .scissors");
-        
-        // Loop through each button and add event listeners for both mouse and touch events
-        buttons.forEach(function(button) {
-            button.addEventListener("mousedown", function(event) {
-            event.preventDefault(); // Prevent default mouse behavior (e.g., text selection)
-            changeButtonColor(button); // Change button color
-            });
-        
-            button.addEventListener("touchstart", function(event) {
-            event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
-            changeButtonColor(button); // Change button color
-            playGame(playerMove);
-            });
-        });
-  
-  
         
             //document.title = "DOM";
             //console.log(document.body.innerHTML)
